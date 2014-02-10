@@ -1,10 +1,12 @@
 #include <iostream>
+#include <fstream>
 #include "FreeImage.h"
 
 using namespace std;
 
 void inverse_image(FIBITMAP * bitmap);
 void grayscale_image(FIBITMAP * bitmap);
+void generate_frequency_histogram(FIBITMAP * bitmap);
 
 int main() {
 	FreeImage_Initialise();
@@ -17,6 +19,7 @@ int main() {
 		FIBITMAP * bitmap = FreeImage_Load(fif, filename);
 
 		grayscale_image(bitmap);
+		generate_frequency_histogram(bitmap);
 
 		FreeImage_Save(FIF_JPEG, bitmap, "filename.jpeg", 0);
 	}
@@ -67,5 +70,34 @@ void grayscale_image(FIBITMAP * bitmap) {
 
 			FreeImage_SetPixelColor(bitmap, x, y, &pixel);
 		}
+	}
+}
+
+void generate_frequency_histogram(FIBITMAP * bitmap) {
+	int histogram[256];
+
+	RGBQUAD pixel;
+
+	const int BITMAP_WIDTH = FreeImage_GetWidth(bitmap);
+	const int BITMAP_HEIGHT = FreeImage_GetHeight(bitmap);
+
+	for (int i = 0; i < 255; i++) { 
+		histogram[i] = 0; 
+	}
+
+	for (int y = 0; y < BITMAP_HEIGHT; y++) {
+		for (int x = 0; x < BITMAP_WIDTH; x++) {
+			FreeImage_GetPixelColor(bitmap, x, y, &pixel);
+			histogram[pixel.rgbRed]++;
+		}
+	}
+
+	ofstream output("output.csv");
+	if (output.is_open()) {
+		for (int i = 0; i < 255; i++) {
+			output << i << ',' << histogram[i] << endl;
+		}
+
+		output.close();
 	}
 }
