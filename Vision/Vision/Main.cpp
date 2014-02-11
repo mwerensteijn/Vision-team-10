@@ -87,8 +87,12 @@ int * get_grayscale_intensity_histogram(FIBITMAP * bitmap) {
 	const int BITMAP_WIDTH = FreeImage_GetWidth(bitmap);
 	const int BITMAP_HEIGHT = FreeImage_GetHeight(bitmap);
 
+<<<<<<< HEAD
 	for (int i = 0; i < 255; i++) {
 		//Hallo
+=======
+	for (int i = 0; i < 256; i++) {
+>>>>>>> 6a28a4ac68bd5044cdc0588be44a915cce98e351
 		histogram[i] = 0;
 	}
 
@@ -139,7 +143,7 @@ void generate_frequency_histogram(FIBITMAP * bitmap, string filename) {
 	filename.append("_frequency.csv");
 	ofstream output(filename);
 	if (output.is_open()) {
-		for (int i = 0; i < 255; i++) {
+		for (int i = 0; i < 256; i++) {
 			output << i << ',' << histogram[i] << endl;
 		}
 
