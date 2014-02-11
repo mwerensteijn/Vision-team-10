@@ -17,6 +17,7 @@ int main() {
 	const char * filename = "img.jpg";
 
 	FREE_IMAGE_FORMAT fif = FreeImage_GetFileType(filename);
+	
 
 	if (fif != FIF_UNKNOWN) {
 		FIBITMAP * bitmap = FreeImage_Load(fif, filename);
@@ -87,6 +88,7 @@ int * get_grayscale_intensity_histogram(FIBITMAP * bitmap) {
 	const int BITMAP_HEIGHT = FreeImage_GetHeight(bitmap);
 
 	for (int i = 0; i < 255; i++) {
+		//Hallo
 		histogram[i] = 0;
 	}
 
