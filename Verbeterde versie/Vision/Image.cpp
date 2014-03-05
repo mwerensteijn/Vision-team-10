@@ -35,12 +35,46 @@ Image::Image(std::string filename) {
 	}
 }
 
+Image::Image(Image & image) {
+	loaded = image.loaded;
+
+	width = image.width;
+	height = image.height;
+
+	unsigned char * dataPtr = image.getDataPointer();
+
+	int size = width * height * 3;
+	data = new unsigned char[size];
+
+	for (int i = 0; i < size; i++) {
+		data[i] = dataPtr[i];
+	}
+}
+
 Image::~Image() {
 	if (loaded) {
 		delete[] data;
 	}
 
 	FreeImage_DeInitialise();
+}
+
+Image & Image::operator=(const Image & image) {
+	loaded = image.loaded;
+
+	width = image.width;
+	height = image.height;
+
+	unsigned char * dataPtr = image.data;
+
+	int size = width * height * 3;
+	data = new unsigned char[size];
+
+	for (int i = 0; i < size; i++) {
+		data[i] = dataPtr[i];
+	}
+
+	return *this;
 }
 
 int Image::getWidth() {
@@ -70,6 +104,6 @@ void Image::saveImage(std::string filename) {
 			}
 		}
 
-		FreeImage_Save(FIF_JPEG, bitmap, filename.c_str(), 0);
+		FreeImage_Save(FIF_BMP, bitmap, filename.append(".bmp").c_str(), 0);
 	}
 }

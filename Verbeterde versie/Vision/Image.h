@@ -8,7 +8,10 @@
 class Image {
 public:
 	Image(std::string filename);
+	Image(Image & image);
 	~Image();
+
+	Image & operator=(const Image & i);
 
 	bool isLoaded() { return loaded; };
 
