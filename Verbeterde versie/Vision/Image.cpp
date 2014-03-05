@@ -11,8 +11,8 @@ Image::Image(std::string filename) {
 		width = FreeImage_GetWidth(bitmap);
 		height = FreeImage_GetHeight(bitmap);
 
-		data = new char[width * height * 3];
-		char * ptr = data;
+		data = new unsigned char[width * height * 3];
+		unsigned char * ptr = data;
 
 		RGBQUAD pixel;
 			
@@ -55,7 +55,7 @@ void Image::saveImage(std::string filename) {
 	if (loaded) {
 		FIBITMAP * bitmap = FreeImage_Allocate(width, height, 24);
 
-		char * ptr = data;
+		unsigned char * ptr = data;
 
 		RGBQUAD pixel;
 		for (int y = 0; y < height; y++) {

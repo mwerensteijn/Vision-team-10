@@ -15,13 +15,13 @@ public:
 	int getWidth();
 	int getHeight();
 
-	char * getDataPointer() { return data; }
+	unsigned char * getDataPointer() { return data; }
 
 	void saveImage(std::string filename);
 private:
 	bool loaded;
 
-	char* data;
+	unsigned char* data;
 
 	int width;
 	int height;

@@ -85,13 +85,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Histogram.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Algorithms\GrayscaleAlgorithm.h" />
     <ClInclude Include="Algorithms\InverseAlgorithm.h" />
     <ClInclude Include="Algorithms\VisionAlgorithm.h" />
     <ClInclude Include="FreeImage\FreeImage.h" />
+    <ClInclude Include="Histogram.h" />
     <ClInclude Include="Image.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

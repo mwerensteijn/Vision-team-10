@@ -1,7 +1,7 @@
 #ifndef __VISIONALGORITHM_H__
 #define __VISIONALGORITHM_H__
 
-#include "Image.h"
+#include "../Image.h"
 
 class VisionAlgorithm {
 public:
