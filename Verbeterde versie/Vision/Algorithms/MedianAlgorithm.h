@@ -11,6 +11,8 @@
 class MedianAlgorithm : public VisionAlgorithm {
 public:
 	void VisionAlgorithm::doAlgorithm(Image & image) {
+		int maskSize = MASKSIZE;
+		
 		MaskLooper p;
 
 		Image source = image;
@@ -18,26 +20,26 @@ public:
 		int size = image.getWidth() * image.getHeight() * 3;
 		int height = image.getHeight();
 		int width = image.getWidth();
-		int borderPixels = p.getBorderPixels(MASKSIZE);
+		int borderPixels = p.getBorderPixels(maskSize);
 
 		unsigned char * src = source.getDataPointer();
 		unsigned char * dst = image.getDataPointer();
 
 		memcpy(dst, src, size);
-		int arrayR[MASKSIZE*MASKSIZE];
-		int arrayG[MASKSIZE*MASKSIZE];
-		int arrayB[MASKSIZE*MASKSIZE];
-		int maskTotal = MASKSIZE*MASKSIZE;
+		int* arrayR = new int[maskSize*maskSize];
+		int* arrayG = new int[maskSize*maskSize];
+		int* arrayB = new int[maskSize*maskSize];
+		int maskTotal = maskSize*maskSize;
 		int counter = 0;
 		for (int h = borderPixels; h < height - borderPixels; h++) {
 			for (int w = borderPixels; w < width - borderPixels; w++) {
-				for (int newW = w; newW < (w + 3); newW++)
+				for (int newW = w; newW < (w + maskSize); newW++)
 				{
-					for (int newH = h; newH < (h + 3); newH++)
+					for (int newH = h; newH < (h + maskSize); newH++)
 					{
-						arrayR[counter] = (int)src[3 * ((newH - 1) * width + (newW - 1))];
-						arrayG[counter] = (int)src[3 * ((newH - 1) * width + (newW - 1)) + 1];
-						arrayB[counter] = (int)src[3 * ((newH - 1) * width + (newW - 1)) + 2];
+						arrayR[counter] = (int)src[3 * ((newH - borderPixels) * width + (newW - borderPixels))];
+						arrayG[counter] = (int)src[3 * ((newH - borderPixels) * width + (newW - borderPixels)) + 1];
+						arrayB[counter] = (int)src[3 * ((newH - borderPixels) * width + (newW - borderPixels)) + 2];
 						counter++;
 					}
 				}
@@ -47,6 +49,9 @@ public:
 				counter = 0;
 			}
 		}
+		delete[] arrayR;
+		delete[] arrayG;
+		delete[] arrayB;
 	}
 
 	double getMedian(int values[], int maskTotal) {
