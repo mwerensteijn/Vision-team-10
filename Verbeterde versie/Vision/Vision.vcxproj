@@ -92,6 +92,8 @@
   <ItemGroup>
     <ClInclude Include="Algorithms\GrayscaleAlgorithm.h" />
     <ClInclude Include="Algorithms\InverseAlgorithm.h" />
+    <ClInclude Include="Algorithms\MaskLooper.h" />
+    <ClInclude Include="Algorithms\MedianAlgorithm.h" />
     <ClInclude Include="Algorithms\SaltnPepperAlgorithm.h" />
     <ClInclude Include="Algorithms\VisionAlgorithm.h" />
     <ClInclude Include="FreeImage\FreeImage.h" />
