@@ -56,5 +56,11 @@
     <ClInclude Include="Algorithms\MaskLooper.h">
       <Filter>Header Files\Algorithms</Filter>
     </ClInclude>
+    <ClInclude Include="Algorithms\MaximumAlgorithm.h">
+      <Filter>Header Files\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithms\MinimumAlgorithm.h">
+      <Filter>Header Files\Algorithms</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

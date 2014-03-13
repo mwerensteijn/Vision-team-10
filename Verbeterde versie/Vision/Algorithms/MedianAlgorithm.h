@@ -17,17 +17,17 @@ public:
 		
 		MaskLooper p;
 
-		Image source = image;
-
 		int size = image.getWidth() * image.getHeight() * 3;
 		int height = image.getHeight();
 		int width = image.getWidth();
 		int borderPixels = p.getBorderPixels(maskSize);
-
-		unsigned char * src = source.getDataPointer();
+		
 		unsigned char * dst = image.getDataPointer();
-
-		memcpy(dst, src, size);
+		std::vector<int> src;
+		src.resize(size);
+		for (int i = 0; i < size; i++) {
+			src[i] = dst[i];
+		}
 		int* arrayR = new int[maskSize*maskSize];
 		int* arrayG = new int[maskSize*maskSize];
 		int* arrayB = new int[maskSize*maskSize];
@@ -54,6 +54,7 @@ public:
 		delete[] arrayR;
 		delete[] arrayG;
 		delete[] arrayB;
+		
 	}
 
 	double getMedian(int values[], int maskTotal) {
