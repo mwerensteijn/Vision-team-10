@@ -1,11 +1,11 @@
 #ifndef INVERSEALGORITHM_H
 #define INVERSEALGORITHM_H
 
-#include "VisionAlgorithm.h"
+#include "../Image.h"
 
-class InverseAlgorithm : public VisionAlgorithm {
+class InverseAlgorithm {
 public:
-	void VisionAlgorithm::doAlgorithm(Image & image) {
+	static void doAlgorithm(Image & image) {
 		int size = image.getWidth() * image.getHeight() * 3;
 
 		unsigned char * ptr = image.getDataPointer();

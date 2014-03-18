@@ -27,6 +27,12 @@
     <ClCompile Include="Histogram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="KernelWalker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Kernel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FreeImage\FreeImage.h">
@@ -38,29 +44,38 @@
     <ClInclude Include="Algorithms\InverseAlgorithm.h">
       <Filter>Header Files\Algorithms</Filter>
     </ClInclude>
-    <ClInclude Include="Algorithms\VisionAlgorithm.h">
-      <Filter>Header Files\Algorithms</Filter>
-    </ClInclude>
     <ClInclude Include="Algorithms\GrayscaleAlgorithm.h">
       <Filter>Header Files\Algorithms</Filter>
     </ClInclude>
     <ClInclude Include="Histogram.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ColorChannel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KernelWalker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithms\HistogramEqualizationAlgorithm.h">
+      <Filter>Header Files\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="Kernel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithms\MaximumFilterAlgorithm.h">
+      <Filter>Header Files\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithms\MedianFilterAlgorithm.h">
+      <Filter>Header Files\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithms\MinimumFilterAlgorithm.h">
+      <Filter>Header Files\Algorithms</Filter>
+    </ClInclude>
     <ClInclude Include="Algorithms\SaltnPepperAlgorithm.h">
       <Filter>Header Files\Algorithms</Filter>
     </ClInclude>
-    <ClInclude Include="Algorithms\MedianAlgorithm.h">
-      <Filter>Header Files\Algorithms</Filter>
-    </ClInclude>
-    <ClInclude Include="Algorithms\MaskLooper.h">
-      <Filter>Header Files\Algorithms</Filter>
-    </ClInclude>
-    <ClInclude Include="Algorithms\MaximumAlgorithm.h">
-      <Filter>Header Files\Algorithms</Filter>
-    </ClInclude>
-    <ClInclude Include="Algorithms\MinimumAlgorithm.h">
-      <Filter>Header Files\Algorithms</Filter>
+    <ClInclude Include="Algorithms.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

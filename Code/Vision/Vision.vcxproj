@@ -85,10 +85,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Histogram.cpp" />
+    <ClCompile Include="Image.cpp" />
+    <ClCompile Include="Kernel.cpp" />
+    <ClCompile Include="KernelWalker.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Algorithms.h" />
+    <ClInclude Include="Algorithms\HistogramEqualizationAlgorithm.h" />
+    <ClInclude Include="Algorithms\GrayscaleAlgorithm.h" />
+    <ClInclude Include="Algorithms\InverseAlgorithm.h" />
+    <ClInclude Include="Algorithms\MaximumFilterAlgorithm.h" />
+    <ClInclude Include="Algorithms\MedianFilterAlgorithm.h" />
+    <ClInclude Include="Algorithms\MinimumFilterAlgorithm.h" />
+    <ClInclude Include="Algorithms\SaltnPepperAlgorithm.h" />
+    <ClInclude Include="ColorChannel.h" />
     <ClInclude Include="FreeImage\FreeImage.h" />
+    <ClInclude Include="Histogram.h" />
+    <ClInclude Include="Image.h" />
+    <ClInclude Include="Kernel.h" />
+    <ClInclude Include="KernelWalker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

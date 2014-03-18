@@ -2,11 +2,9 @@
 #define SALTNPEPPERALGORITHM_H
 #define FILTER_WEAKNESS 20
 
-#include "VisionAlgorithm.h"
-
-class SaltnPepperAlgorithm : public VisionAlgorithm {
+class SaltnPepperAlgorithm {
 public:
-	void VisionAlgorithm::doAlgorithm(Image & image) {
+	static void doAlgorithm(Image & image) {
 		int size = image.getWidth() * image.getHeight() * 3;
 
 		unsigned char * ptr = image.getDataPointer();

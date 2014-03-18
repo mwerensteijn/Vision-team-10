@@ -1,0 +1,7 @@
+#include "Algorithms/InverseAlgorithm.h"
+#include "Algorithms/GrayscaleAlgorithm.h"
+#include "Algorithms/HistogramEqualizationAlgorithm.h"
+#include "Algorithms/MedianFilterAlgorithm.h"
+#include "Algorithms/MinimumFilterAlgorithm.h"
+#include "Algorithms/MaximumFilterAlgorithm.h"
+#include "Algorithms/SaltnPepperAlgorithm.h"

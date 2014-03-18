@@ -1,11 +1,11 @@
 #ifndef GRAYSCALEALGORITHM_H
 #define GRAYSCALEALGORITHM_H
 
-#include "VisionAlgorithm.h"
+#include "../Image.h"
 
-class GrayscaleAlgorithm : public VisionAlgorithm {
+class GrayscaleAlgorithm {
 public:
-	void VisionAlgorithm::doAlgorithm(Image & image) {
+	static void doAlgorithm(Image & image) {
 		int size = image.getWidth() * image.getHeight() * 3;
 
 		unsigned char * ptr = image.getDataPointer();
