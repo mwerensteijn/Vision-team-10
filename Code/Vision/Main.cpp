@@ -12,9 +12,9 @@ int main() {
 	Image image("lenna.png");
 
 	if (image.isLoaded()) {
-		SaltnPepperAlgorithm::doAlgorithm(image);
+		/*SaltnPepperAlgorithm::doAlgorithm(image);
 		image.saveImage("noised_image.jpg");
-		
+
 		Image median(image);
 		MedianFilterAlgorithm mf(3);
 		mf.runAlgorithm(median);
@@ -28,7 +28,10 @@ int main() {
 		Image maximum(image);
 		MaximumFilterAlgorithm mfb(3);
 		mfb.runAlgorithm(maximum);
-		maximum.saveImage("maximum.jpg");
+		maximum.saveImage("maximum.jpg");*/
+
+		MedianDifferenceAlgorithm::doAlgorithm(image);
+		image.saveImage("HUH.jpg");
 	}
 
 	Image::unloadLibrary();
