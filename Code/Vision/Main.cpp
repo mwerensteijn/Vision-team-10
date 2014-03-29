@@ -12,26 +12,8 @@ int main() {
 	Image image("lenna.png");
 
 	if (image.isLoaded()) {
-		/*SaltnPepperAlgorithm::doAlgorithm(image);
-		image.saveImage("noised_image.jpg");
-
-		Image median(image);
-		MedianFilterAlgorithm mf(3);
-		mf.runAlgorithm(median);
-		median.saveImage("median_image.jpg");
-
-		Image minimum(image);
-		MinimumFilterAlgorithm mfa(3);
-		mfa.runAlgorithm(minimum);
-		minimum.saveImage("minimum.jpg");
-
-		Image maximum(image);
-		MaximumFilterAlgorithm mfb(3);
-		mfb.runAlgorithm(maximum);
-		maximum.saveImage("maximum.jpg");*/
-
-		MedianDifferenceAlgorithm::doAlgorithm(image);
-		image.saveImage("HUH.jpg");
+		KMeansClusteringAlgorithm::doAlgorithm(image, 3);
+		image.saveImage("CLUSTERED.jpg");
 	}
 
 	Image::unloadLibrary();

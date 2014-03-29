@@ -6,4 +6,3 @@
 #include "Algorithms/MaximumFilterAlgorithm.h"
 #include "Algorithms/SaltnPepperAlgorithm.h"
 #include "Algorithms/KMeansClusteringAlgorithm.h"
-#include "Algorithms/MedianDifferenceAlgorithm.h"
