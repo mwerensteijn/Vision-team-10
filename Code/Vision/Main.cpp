@@ -6,17 +6,27 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char ** argv) {
 	Image::loadLibrary();
 
-	Image image("lenna.png");
+	Image image(argv[1]);
+	Image auto_image(image);
+	Image threshold(image);
+
+	string name = argv[1];
+	int clusters = std::atoi(argv[2]);
+
+	std::cout << clusters << std::endl;
 
 	if (image.isLoaded()) {
-		GrayscaleAlgorithm::doAlgorithm(image);
-		ThresholdAlgorithm::doAlgorithm(image);
-		image.saveImage("THRESHOLDED.jpg");
-	}
+		//1
+		KMeansClusteringAlgorithm::doAlgorithm(auto_image, clusters);
+		auto_image.saveImage("kMeansAuto_" + name);
+		//3
+		ThresholdAlgorithm::doAlgorithm(threshold);
+		threshold.saveImage("threshold_" + name);
 
+	}
 	Image::unloadLibrary();
 
 	return 0;

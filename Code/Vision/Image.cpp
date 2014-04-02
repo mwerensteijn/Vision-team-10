@@ -89,7 +89,7 @@ void Image::saveImage(std::string filename) {
 				FreeImage_SetPixelColor(bitmap, x, y, &pixel);
 			}
 		}
-
+		filename += ".jpg";
 		FreeImage_Save(FIF_JPEG, bitmap, filename.c_str(), 0);
 	}
 }

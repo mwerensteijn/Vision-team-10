@@ -10,7 +10,6 @@ public:
 	static void doAlgorithm(Image & image, bool grayScale = false) {
 		if (grayScale) {
 			GrayscaleAlgorithm::doAlgorithm(image);
-			image.saveImage("grayscale.jpg");
 		}
 
 		Histogram redHistogram(image.getRedChannel());
