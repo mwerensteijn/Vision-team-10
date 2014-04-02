@@ -86,5 +86,8 @@
     <ClInclude Include="Cluster.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Algorithms\ThresholdAlgorithm.h">
+      <Filter>Header Files\Algorithms</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -12,8 +12,9 @@ int main() {
 	Image image("lenna.png");
 
 	if (image.isLoaded()) {
-		KMeansClusteringAlgorithm::doAlgorithm(image, 3);
-		image.saveImage("CLUSTERED.jpg");
+		GrayscaleAlgorithm::doAlgorithm(image);
+		ThresholdAlgorithm::doAlgorithm(image);
+		image.saveImage("THRESHOLDED.jpg");
 	}
 
 	Image::unloadLibrary();
