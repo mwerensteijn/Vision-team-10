@@ -9,22 +9,26 @@ using namespace std;
 int main(int argc, char ** argv) {
 	Image::loadLibrary();
 
+	//1a
 	Image image(argv[1]);
-	Image auto_image(image);
-	Image threshold(image);
+	string imageName = argv[1];
 
-	string name = argv[1];
-	int clusters = std::atoi(argv[2]);
+	//1b
+	string fileName = argv[2];
 
-	std::cout << clusters << std::endl;
+	//1c
+	int order = std::atoi(argv[3]);
 
 	if (image.isLoaded()) {
-		//1
-		KMeansClusteringAlgorithm::doAlgorithm(auto_image, clusters);
-		auto_image.saveImage("kMeansAuto_" + name);
+		//1d
+
+		//2a
+
+		//2b
+
+		//2c
+
 		//3
-		ThresholdAlgorithm::doAlgorithm(threshold);
-		threshold.saveImage("threshold_" + name);
 
 	}
 	Image::unloadLibrary();

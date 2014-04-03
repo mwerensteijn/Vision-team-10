@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int week1(int argc, char ** argv) {
+int week12(int argc, char ** argv) {
 	Image::loadLibrary();
 
 	Image image(argv[1]);
