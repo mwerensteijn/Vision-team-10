@@ -105,6 +105,6 @@ void Image::saveImage(std::string filename) {
 			}
 		}
 
-		FreeImage_Save(FIF_JPEG, bitmap, filename.c_str(), 0);
+		FreeImage_Save(FIF_BMP, bitmap, filename.c_str(), 0);
 	}
 }

@@ -101,10 +101,12 @@
     <ClInclude Include="Algorithms\InverseAlgorithm.h" />
     <ClInclude Include="Algorithms\KMeansClusteringAlgorithm.h" />
     <ClInclude Include="Algorithms\MaximumFilterAlgorithm.h" />
+    <ClInclude Include="Algorithms\MedianDifferenceAlgorithm.h" />
     <ClInclude Include="Algorithms\MedianFilterAlgorithm.h" />
     <ClInclude Include="Algorithms\MinimumFilterAlgorithm.h" />
     <ClInclude Include="Algorithms\SaltnPepperAlgorithm.h" />
     <ClInclude Include="Algorithms\ThresholdAlgorithm.h" />
+    <ClInclude Include="Algorithms\TransformMatrix.h" />
     <ClInclude Include="Cluster.h" />
     <ClInclude Include="ColorChannel.h" />
     <ClInclude Include="FreeImage\FreeImage.h" />

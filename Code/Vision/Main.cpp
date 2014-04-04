@@ -14,7 +14,7 @@ int main() {
 	if (image.isLoaded()) {
 		TransformMatrix::doAlgorithm(image, 0, "Matrices/Rotate20.txt");
 		
-		image.saveImage("CLUSTERED.jpg");
+		image.saveImage("CLUSTERED.bmp");
 	}
 
 	Image::unloadLibrary();

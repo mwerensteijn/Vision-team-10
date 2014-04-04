@@ -12,21 +12,25 @@ public:
 		int height = image.getHeight();
 
 		// To keep the source values we temporary create a destination image which we will later copy back in the source.
-		Image destination = Image(image.getWidth(), image.getHeight());
+		Image * destination;
 
 		// Pointers to access data.
 		unsigned char * sourceDataPtr = image.getDataPointer();
-		unsigned char * destDataPtr = destination.getDataPointer();
 
 		double mask[9];
 		loadMaskFromFile(file, mask);
 
 		// If the matrix doesn't has an inverse, backwards mapping will not be possible.
 		if (hasInverse(mask)) {
-			// Inverse the 3x3 matrix.
-			inverse3x3Matrix(mask);
+			// The output image may be larger or smaller than the original.
+			int newWidth = 0;
+			int newHeight = 0;
 
-			// For all pixels in the image.
+			// To calculate the right output positions.
+			int minWidth = 0;
+			int minHeight = 0;
+
+			// Find the maximum and minimum values for the width and height of the output image.
 			for (int y = 0; y < height; y++) {
 				for (int x = 0; x < width; x++) {
 					// Find the x position in the source image.
@@ -39,11 +43,59 @@ public:
 									 mask[4] * y +
 									 mask[5];
 
+					// Is the x position bigger?
+					if (sourceX > newWidth) {
+						// The x position is the new maximum width.
+						newWidth = sourceX;
+					}
+					else if (sourceX < minWidth) {
+						// The x position is the new minimum width.
+						minWidth = sourceX;
+					}
+
+					if (sourceY > newHeight) {
+						// The y position is the new maximum height.
+						newHeight = sourceY;
+					}
+					else if (sourceY < minHeight) {
+						// The y position is the new minimum height.
+						minHeight = sourceY;
+					}
+				}
+			}
+
+			minWidth = std::abs(minWidth);
+			minHeight = std::abs(minHeight);
+
+			// Plus 1 Because an array index starts at zero.
+			newWidth += minWidth + 1;
+			newHeight += minHeight + 1;
+
+			// Create the output image with the right sizes.
+			destination = new Image(newWidth, newHeight);
+			unsigned char * destDataPtr = destination->getDataPointer();
+
+			// Inverse the 3x3 matrix.
+			inverse3x3Matrix(mask);
+
+			// For all pixels in the image.
+			for (int y = 0; y < newHeight; y++) {
+				for (int x = 0; x < newWidth; x++) {
+					// Find the x position in the source image.
+					double sourceX = mask[0] * (x - minWidth) +
+									 mask[1] * (y - minHeight) +
+									 mask[2];
+
+					// Find the y position in the source image.
+					double sourceY = mask[3] * (x - minWidth) +
+									 mask[4] * (y - minHeight) +
+									 mask[5];
+
 					// Only change the pixel if the location of the pixel exists in the source image.
 					if (sourceX < width && sourceY < height && sourceX >= 0 && sourceY >= 0) {
 						//std::cout << "sourceX: " << sourceX << "\tsourceY: " << sourceY << std::endl;
 
-						int destPos = (y * width + x) * 3;
+						int destPos = (y * newWidth + x) * 3;
 						int r, g, b;
 
 						if (interpolationOrder == 1) {
@@ -110,10 +162,21 @@ public:
 							b = sourceDataPtr[sourcePos + 2];
 						}
 
-						// Copy the pixel.
-						destDataPtr[destPos] = r;
-						destDataPtr[destPos + 1] = g;
-						destDataPtr[destPos + 2] = b;
+						if (x == 10 && y == 10) {
+							//std::cout << "r: " << r << "\tg: " << g << "\tb: " << b << std::endl;
+							//std::cin.get();
+
+							destDataPtr[destPos] = 0;
+							destDataPtr[destPos + 1] = 0;
+							destDataPtr[destPos + 2] = 0;
+						}
+						else {
+
+							// Copy the pixel.
+							destDataPtr[destPos] = r;
+							destDataPtr[destPos + 1] = g;
+							destDataPtr[destPos + 2] = b;
+						}
 					}
 				}
 			}
@@ -125,7 +188,8 @@ public:
 		}
 
 		// Copy the image back to the parameter.
-		image = destination;
+		image = *destination;
+		delete destination;
 	}
 
 	static bool hasInverse(double * matrix) {
@@ -209,11 +273,16 @@ public:
 	}
 
 	static void loadMaskFromFile(std::string file, double * mask) {
+		// Open the file
 		std::fstream myfile(file, std::ios_base::in);
 
+		// For every position in the matrix, read a number from the file.
 		for (int i = 0; i < 9; i++) {
 			myfile >> mask[i];
 		}
+
+		// Close the file.
+		myfile.close();
 	}
 
 };

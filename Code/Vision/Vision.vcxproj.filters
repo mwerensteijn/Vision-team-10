@@ -95,5 +95,11 @@
     <ClInclude Include="Algorithms\ThresholdAlgorithm.h">
       <Filter>Header Files\Algorithms</Filter>
     </ClInclude>
+    <ClInclude Include="Algorithms\MedianDifferenceAlgorithm.h">
+      <Filter>Header Files\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithms\TransformMatrix.h">
+      <Filter>Header Files\Algorithms</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
