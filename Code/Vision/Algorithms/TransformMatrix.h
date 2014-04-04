@@ -20,7 +20,8 @@ public:
 
 		double rotation = 15 * 3.1415926535897 / 180.0;
 		double mask[9] = { std::cos(rotation), -std::sin(rotation), 0, std::sin(rotation), std::cos(rotation), 0, 0, 0, 1 };
-		
+		//double mask[9] = { 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1 };
+
 		// If the matrix doesn't has an inverse, backwards mapping will not be possible.
 		if (hasInverse(mask)) {
 			// Inverse the 3x3 matrix.
@@ -31,42 +32,97 @@ public:
 				for (int x = 0; x < width; x++) {
 					// Find the x position in the source image.
 					double sourceX = mask[0] * x +
-						mask[1] * y +
-						mask[2];
+									 mask[1] * y +
+									 mask[2];
 
 					// Find the y position in the source image.
 					double sourceY = mask[3] * x +
-						mask[4] * y +
-						mask[5];
-
-					if (interpolationOrder == 1) {
-						int sourceXLeft = std::floor(sourceX);
-						int sourceXRight = std::round(sourceX);
-
-						int sourceYTop = std::floor(sourceX);
-						int sourceYBottom = std::round(sourceX);
-
-
-					}
-					else {
-						// Interpolation order 0.
-						sourceX = std::round(sourceX);
-						sourceY = std::round(sourceY);
-					}
+									 mask[4] * y +
+									 mask[5];
 
 					// Only change the pixel if the location of the pixel exists in the source image.
 					if (sourceX < width && sourceY < height && sourceX >= 0 && sourceY >= 0) {
-						// Calculate the positions to be used in a single array.
-						int sourcePos = (sourceY * width + sourceX) * 3;
+						//std::cout << "sourceX: " << sourceX << "\tsourceY: " << sourceY << std::endl;
+
 						int destPos = (y * width + x) * 3;
-						
+						int r, g, b;
+
+						if (interpolationOrder == 1) {
+							// First interpolation order
+
+							// X position of the left corner pixel.
+							int sourceXLeft = sourceX;
+							// X position of the right corner pixel.
+							int sourceXRight = sourceX + 1;
+
+							// Y position of the top corner pixel.
+							int sourceYTop = sourceY;
+							// Y position of the bottom corner pixel.
+							int sourceYBottom = sourceY + 1;
+
+							// Calculate the weighted percentage values for each cornel pixel.
+							double percentageLeftTop = (sourceYBottom - sourceY) * (sourceXRight - sourceX);
+							double percentageLeftBottom = (sourceY - sourceYTop) * (sourceXRight - sourceX);
+							double percentageRightTop = (sourceX - sourceXLeft) * (sourceYBottom - sourceY);
+							double percentageRightBottom = (sourceX - sourceXLeft) * (sourceY - sourceYTop);
+
+							// Set R G B to zero.
+							r = 0; g = 0; b = 0;
+
+							// Precalulate the array position, to save cpu time.
+							int arrayPos = (sourceYTop * width + sourceXLeft) * 3;
+							// Add the weighted color values to the destination pixel.
+							r += sourceDataPtr[arrayPos] * percentageLeftTop;
+							g += sourceDataPtr[arrayPos + 1] * percentageLeftTop;
+							b += sourceDataPtr[arrayPos + 2] * percentageLeftTop;
+							
+							// Precalulate the array position, to save cpu time.
+							arrayPos = (sourceYTop * width + sourceXRight) * 3;
+							// Add the weighted color values to the destination pixel.
+							r += sourceDataPtr[arrayPos] * percentageRightTop;
+							g += sourceDataPtr[arrayPos + 1] * percentageRightTop;
+							b += sourceDataPtr[arrayPos + 2] * percentageRightTop;
+							
+							// Precalulate the array position, to save cpu time.
+							arrayPos = (sourceYBottom * width + sourceXLeft) * 3;
+							// Add the weighted color values to the destination pixel.
+							r += sourceDataPtr[arrayPos] * percentageLeftBottom;
+							g += sourceDataPtr[arrayPos + 1] * percentageLeftBottom;
+							b += sourceDataPtr[arrayPos + 2] * percentageLeftBottom;
+
+							// Precalulate the array position, to save cpu time.
+							arrayPos = (sourceYBottom * width + sourceXRight) * 3;
+							// Add the weighted color values to the destination pixel.
+							r += sourceDataPtr[arrayPos] * percentageRightBottom;
+							g += sourceDataPtr[arrayPos + 1] * percentageRightBottom;
+							b += sourceDataPtr[arrayPos + 2] * percentageRightBottom;
+						}
+						else {
+							// Interpolation order 0.
+							sourceX = std::round(sourceX);
+							sourceY = std::round(sourceY);
+
+							// Calculate the positions to be used in a single array.
+							int sourcePos = (sourceY * width + sourceX) * 3;
+
+							// Get the source pixel
+							r = sourceDataPtr[sourcePos];
+							g = sourceDataPtr[sourcePos + 1];
+							b = sourceDataPtr[sourcePos + 2];
+						}
+
 						// Copy the pixel.
-						destDataPtr[destPos] = sourceDataPtr[sourcePos];
-						destDataPtr[destPos + 1] = sourceDataPtr[sourcePos + 1];
-						destDataPtr[destPos + 2] = sourceDataPtr[sourcePos + 2];
+						destDataPtr[destPos] = r;
+						destDataPtr[destPos + 1] = g;
+						destDataPtr[destPos + 2] = b;
 					}
 				}
 			}
+		}
+		else {
+			// Matrix can not be inversed.
+			std::cout << "The matrix can not be inversed!\n";
+			std::cin.get();
 		}
 
 		// Copy the image back to the parameter.
@@ -151,60 +207,6 @@ public:
 				matrix[x * 3 + y] = old[y * 3 + x];
 			}
 		}
-	}
-
-	static void fordwardMapping(Image & image) {
-		double rotation = 15 * 3.1415926535897 / 180.0;
-
-		double mask[3][3] = { { std::cos(rotation), -std::sin(rotation), 0 },
-		{ std::sin(rotation), std::cos(rotation), 0 },
-		{ 0, 0, 1 } };
-
-		Image destination = Image(image.getWidth(), image.getHeight());
-
-		int width = image.getWidth();
-		int height = image.getHeight();
-
-		unsigned char * sourceDataPtr = image.getDataPointer();
-		unsigned char * destDataPtr = destination.getDataPointer();
-
-		int pixels = width * height;
-		char * pixelsEdited = new char[pixels];
-		for (int i = 0; i < pixels; i++) {
-			pixelsEdited[i] = 0;
-		}
-
-		for (int y = 0; y < height; y++) {
-			for (int x = 0; x < width; x++) {
-				int newX = mask[0][0] * x +
-					mask[0][1] * y +
-					mask[0][2];
-
-				int newY = mask[1][0] * x +
-					mask[1][1] * y +
-					mask[1][2];
-
-				if (newX < width && newY < height && newX >= 0 && newY >= 0) {
-					int oldPos = (y * image.getWidth() + x) * 3;
-					int newPos = (newY * image.getWidth() + newX) * 3;
-					destDataPtr[newPos] = sourceDataPtr[oldPos];
-					destDataPtr[newPos + 1] = sourceDataPtr[oldPos + 1];
-					destDataPtr[newPos + 2] = sourceDataPtr[oldPos + 2];
-
-					pixelsEdited[newPos / 3] = 1;
-				}
-			}
-		}
-
-		for (int i = 0; i < pixels; i++) {
-			if (pixelsEdited[i] == 0) {
-				// NU DE PIXEL AANPASSEN MET INTERPOLATIE
-			}
-		}
-
-		delete[] pixelsEdited;
-
-		image = destination;
 	}
 
 };
