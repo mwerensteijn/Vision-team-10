@@ -27,7 +27,11 @@ public:
 	ColorChannel getGreenChannel() { return ColorChannel(data + 1, width * height); }
 	ColorChannel getBlueChannel() { return ColorChannel(data + 2, width * height); }
 
-	void saveImage(std::string filename);
+	void saveImage(std::string filename, bool r = true, bool g = true, bool b = true);
+	void saveImageRed(std::string filename);
+	void saveImageGreen(std::string filename);
+	void saveImageBlue(std::string filename);
+
 	static void loadLibrary() { FreeImage_Initialise(); }
 	static void unloadLibrary() { FreeImage_DeInitialise(); }
 private:

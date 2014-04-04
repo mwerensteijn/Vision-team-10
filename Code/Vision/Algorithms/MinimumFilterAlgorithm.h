@@ -10,7 +10,7 @@ public:
 
 	virtual int KernelWalker::doAlgorithm() {
 		int * dataPtr = kernel.getDataPtr();
-		int kernelSize = kernel.getSize() * 2;
+		int kernelSize = kernel.getSize() * kernel.getSize();
 
 		int minimum = dataPtr[0];
 

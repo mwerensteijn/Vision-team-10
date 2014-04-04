@@ -36,10 +36,13 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Week1-2.cpp">
+    <ClCompile Include="Week3-4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Week3-4.cpp">
+    <ClCompile Include="Week1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Week2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

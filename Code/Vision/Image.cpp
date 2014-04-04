@@ -86,7 +86,7 @@ int Image::getHeight() {
 	return height;
 }
 
-void Image::saveImage(std::string filename) {
+void Image::saveImage(std::string filename, bool r, bool g, bool b) {
 	if (loaded) {
 		FIBITMAP * bitmap = FreeImage_Allocate(width, height, 24);
 
@@ -95,9 +95,26 @@ void Image::saveImage(std::string filename) {
 		RGBQUAD pixel;
 		for (int y = height; y > 0; y--) {
 			for (int x = 0; x < width; x++) {
-				pixel.rgbRed = ptr[0];
-				pixel.rgbGreen = ptr[1];
-				pixel.rgbBlue = ptr[2];
+				if (r) {
+					pixel.rgbRed = ptr[0];
+				}
+				else {
+					pixel.rgbRed = 0;
+				}
+
+				if (g) {
+					pixel.rgbGreen = ptr[1];
+				}
+				else {
+					pixel.rgbGreen = 0;
+				}
+
+				if (b) {
+					pixel.rgbBlue = ptr[2];
+				}
+				else {
+					pixel.rgbBlue = 0;
+				}
 
 				ptr += 3;
 
@@ -105,6 +122,22 @@ void Image::saveImage(std::string filename) {
 			}
 		}
 
+		filename += ".bmp";
+
 		FreeImage_Save(FIF_BMP, bitmap, filename.c_str(), 0);
 	}
+}
+
+
+void Image::saveImageRed(std::string filename) {
+	saveImage(filename, true, false, false);
+}
+
+void Image::saveImageGreen(std::string filename) {
+	saveImage(filename, false, true, false);
+}
+
+void Image::saveImageBlue(std::string filename) {
+	saveImage(filename, false, false, true);
+
 }
