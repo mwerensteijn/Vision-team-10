@@ -1,11 +1,26 @@
 #include "Image.h"
 
+Image::Image(int w, int h) {
+	loaded = true;
+
+	width = w;
+	height = h;
+
+	int size = width * height * 3;
+	data = new unsigned char[size];
+	unsigned char * ptr = data;
+
+	for (int i = 0; i < size; i++) {
+		ptr[i] = 0;
+	}
+}
+
 Image::Image(std::string filename) {
 	FREE_IMAGE_FORMAT fif = FreeImage_GetFileType(filename.c_str());
 
 	if (fif != FIF_UNKNOWN) {
 		FIBITMAP * bitmap = FreeImage_Load(fif, filename.c_str());
-			
+
 		width = FreeImage_GetWidth(bitmap);
 		height = FreeImage_GetHeight(bitmap);
 
@@ -13,8 +28,8 @@ Image::Image(std::string filename) {
 		unsigned char * ptr = data;
 
 		RGBQUAD pixel;
-			
-		for (int y = 0; y < height; y++) {
+
+		for (int y = height; y > 0; y--) {
 			for (int x = 0; x < width; x++) {
 				FreeImage_GetPixelColor(bitmap, x, y, &pixel);
 
@@ -78,7 +93,7 @@ void Image::saveImage(std::string filename) {
 		unsigned char * ptr = data;
 
 		RGBQUAD pixel;
-		for (int y = 0; y < height; y++) {
+		for (int y = height; y > 0; y--) {
 			for (int x = 0; x < width; x++) {
 				pixel.rgbRed = ptr[0];
 				pixel.rgbGreen = ptr[1];
@@ -89,7 +104,7 @@ void Image::saveImage(std::string filename) {
 				FreeImage_SetPixelColor(bitmap, x, y, &pixel);
 			}
 		}
-		filename += ".jpg";
+
 		FreeImage_Save(FIF_JPEG, bitmap, filename.c_str(), 0);
 	}
 }

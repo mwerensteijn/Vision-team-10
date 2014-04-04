@@ -6,7 +6,7 @@
 
 class TransformMatrix {
 public:
-	static void doAlgorithm(Image & image, int interpolationOrder) {
+	static void doAlgorithm(Image & image, int interpolationOrder, std::string file) {
 		// Image width and height.
 		int width = image.getWidth();
 		int height = image.getHeight();
@@ -18,9 +18,8 @@ public:
 		unsigned char * sourceDataPtr = image.getDataPointer();
 		unsigned char * destDataPtr = destination.getDataPointer();
 
-		double rotation = 15 * 3.1415926535897 / 180.0;
-		double mask[9] = { std::cos(rotation), -std::sin(rotation), 0, std::sin(rotation), std::cos(rotation), 0, 0, 0, 1 };
-		//double mask[9] = { 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1 };
+		double mask[9];
+		loadMaskFromFile(file, mask);
 
 		// If the matrix doesn't has an inverse, backwards mapping will not be possible.
 		if (hasInverse(mask)) {
@@ -206,6 +205,14 @@ public:
 			for (int x = 0; x < 3; x++) {
 				matrix[x * 3 + y] = old[y * 3 + x];
 			}
+		}
+	}
+
+	static void loadMaskFromFile(std::string file, double * mask) {
+		std::fstream myfile(file, std::ios_base::in);
+
+		for (int i = 0; i < 9; i++) {
+			myfile >> mask[i];
 		}
 	}
 

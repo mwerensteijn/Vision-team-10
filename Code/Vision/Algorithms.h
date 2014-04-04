@@ -7,3 +7,4 @@
 #include "Algorithms/SaltnPepperAlgorithm.h"
 #include "Algorithms/KMeansClusteringAlgorithm.h"
 #include "Algorithms/TransformMatrix.h"
+#include "Algorithms/ThresholdAlgorithm.h"

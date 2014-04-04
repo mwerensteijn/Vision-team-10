@@ -8,6 +8,7 @@
 
 class Image {
 public:
+	Image(int width, int height);
 	Image(std::string filename);
 	Image(const Image & image);
 	~Image();

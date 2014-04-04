@@ -6,31 +6,17 @@
 
 using namespace std;
 
-int main(int argc, char ** argv) {
+int main() {
 	Image::loadLibrary();
 
-	//1a
-	Image image(argv[1]);
-	string imageName = argv[1];
-
-	//1b
-	string fileName = argv[2];
-
-	//1c
-	int order = std::atoi(argv[3]);
+	Image image("lenna.png");
 
 	if (image.isLoaded()) {
-		//1d
-
-		//2a
-
-		//2b
-
-		//2c
-
-		//3
-
+		TransformMatrix::doAlgorithm(image, 0, "Matrices/Rotate20.txt");
+		
+		image.saveImage("CLUSTERED.jpg");
 	}
+
 	Image::unloadLibrary();
 
 	return 0;
