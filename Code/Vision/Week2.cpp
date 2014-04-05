@@ -59,7 +59,5 @@ int sfd(int argc, char ** argv) {
 		cout << "Please enter a file name.\n";
 	}
 
-	cin.get();
-
 	return 0;
 }

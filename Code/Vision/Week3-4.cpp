@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int sss(int argc, char ** argv) {
+int s(int argc, char ** argv) {
 	if (argc >= 2) {
 		if (argc >= 3) {
 			Image::loadLibrary();
@@ -47,8 +47,6 @@ int sss(int argc, char ** argv) {
 	else {
 		cout << "Please enter a file name.\n";
 	}
-
-	cin.get();
 
 	return 0;
 }

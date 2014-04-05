@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int bla(int argc, char ** argv) {
+int main(int argc, char ** argv) {
 	if (argc >= 2) {
 		Image::loadLibrary();
 
@@ -64,8 +64,6 @@ int bla(int argc, char ** argv) {
 	} else {
 		cout << "Please enter a file name.\n";
 	}
-
-	cin.get();
 
 	return 0;
 }
