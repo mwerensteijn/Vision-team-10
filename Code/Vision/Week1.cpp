@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int main(int argc, char ** argv) {
+int bla(int argc, char ** argv) {
 	if (argc >= 2) {
 		Image::loadLibrary();
 
@@ -40,6 +40,7 @@ int main(int argc, char ** argv) {
 			image.saveImageRed(string("R_") + name);
 			image.saveImageGreen(string("G_") + name);
 			image.saveImageBlue(string("B_") + name);
+			cout << "Individual color channels saved: R_" << name.c_str() << ".bmp, G_" << name.c_str() << ".bmp, B_" << name.c_str() << ".bmp\n";
 
 			// Opdracht 5
 			Image bin_image(image);

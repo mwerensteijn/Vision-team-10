@@ -90,10 +90,10 @@
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="Kernel.cpp" />
     <ClCompile Include="KernelWalker.cpp" />
-    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Week1.cpp" />
     <ClCompile Include="Week2.cpp" />
     <ClCompile Include="Week3-4.cpp" />
+    <ClCompile Include="Week5-6.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Algorithms.h" />

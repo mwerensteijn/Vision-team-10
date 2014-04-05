@@ -11,17 +11,17 @@ public:
 		int width = image.getWidth();
 		int height = image.getHeight();
 
-		// To keep the source values we temporary create a destination image which we will later copy back in the source.
-		Image * destination;
-
-		// Pointers to access data.
-		unsigned char * sourceDataPtr = image.getDataPointer();
-
 		double mask[9];
 		loadMaskFromFile(file, mask);
 
 		// If the matrix doesn't has an inverse, backwards mapping will not be possible.
 		if (hasInverse(mask)) {
+			// To keep the source values we temporary create a destination image which we will later copy back in the source.
+			Image * destination;
+
+			// Pointers to access data.
+			unsigned char * sourceDataPtr = image.getDataPointer();
+
 			// The output image may be larger or smaller than the original.
 			int newWidth = 0;
 			int newHeight = 0;
@@ -180,16 +180,16 @@ public:
 					}
 				}
 			}
+			
+			// Copy the image back to the parameter.
+			image = *destination;
+			delete destination;
 		}
 		else {
 			// Matrix can not be inversed.
 			std::cout << "The matrix can not be inversed!\n";
 			std::cin.get();
 		}
-
-		// Copy the image back to the parameter.
-		image = *destination;
-		delete destination;
 	}
 
 	static bool hasInverse(double * matrix) {

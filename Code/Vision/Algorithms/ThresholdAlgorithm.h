@@ -22,7 +22,7 @@ public:
 		
 		std::sort(values.begin() , values.end());
 		int threshold = values[size / 2];
-		std::cout << threshold << std::endl;
+		std::cout << "Calculated threshold: " << threshold << std::endl;
 
 		//Apply threshold to pixels
 		int value = 0;
