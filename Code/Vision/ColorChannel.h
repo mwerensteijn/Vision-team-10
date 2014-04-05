@@ -3,15 +3,20 @@
 
 class ColorChannel {
 public:
-	ColorChannel(unsigned char * d, int s) : data(d), size(s) { };
+	// Constructor(dataPointer, imageSize);
+	ColorChannel(unsigned char * d, int s) : data(d), size(s) { }; 
 
-	unsigned char * getDataPointer() { return data; }
+	// Return the data pointer.
+	unsigned char * getDataPointer() { return data; }	
 	
+	// Return the size of the image.
 	int getSize() { return size;  }
 private:
-	unsigned char * data;
-	
-	int size;
+	// Holds the pointer.
+	unsigned char * data; 
+
+	// Holds the size of the image.
+	int size; 
 };
 
 #endif

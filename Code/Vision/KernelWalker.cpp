@@ -6,9 +6,6 @@ KernelWalker::KernelWalker(int s): kernel(s), size(s) {
 	}
 }
 
-KernelWalker::KernelWalker(KernelWalker & kw): kernel(kw.size), size(kw.size) {
-	
-}
 
 void KernelWalker::runAlgorithm(Image & image) {
 	int imageWidth = image.getWidth();

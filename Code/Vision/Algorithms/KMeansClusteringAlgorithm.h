@@ -87,9 +87,9 @@ public:
 
 	// This is how you calculate the distance of two xyz coordinates.
 	static int getDistance(int r1, int g1, int b1, int r2, int g2, int b2) {
-		int arg1 = std::pow(r2 - r1, 2);
-		int arg2 = std::pow(g2 - g1, 2);
-		int arg3 = std::pow(b2 - b1, 2);
+		int arg1 = (int) std::pow(r2 - r1, 2);
+		int arg2 = (int) std::pow(g2 - g1, 2);
+		int arg3 = (int) std::pow(b2 - b1, 2);
 		
 		return std::sqrt(arg1 + arg2 + arg3);
 	}

@@ -3,21 +3,29 @@
 
 class Cluster {
 public:
-	Cluster();
+	// Default constructor.
+	Cluster();	
 
-	void add(int r, int g, int b);
-	void emptyCluster();
+	// Add pixel to the cluster.
+	void add(int r, int g, int b);	
+	// Remove all pixels from the cluster.
+	void emptyCluster();	
 
-	int getCenterR();
-	int getCenterG();
-	int getCenterB();
+	// Get the centers for R, G or B.
+	int getCenterR();	
+	int getCenterG();	
+	int getCenterB();	
 
-	bool recalculateCenter();
+	// Recalculate the average of the pixels in the cluster.
+	bool recalculateCenter();	
 private:
-	int center[3];
+	// Holds the centers of the cluster.
+	int center[3];	
 
-	int total[3];
-	int amount = 0;
+	// Holds the total amount of R, G and B.
+	int total[3];	
+	// Amount of pixels added to the cluster.
+	int amount = 0;	
 };
 
 #endif

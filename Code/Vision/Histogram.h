@@ -5,17 +5,26 @@
 
 class Histogram {
 public:
-	Histogram(ColorChannel ch, int s = 256);
-	Histogram(Histogram & h);
-	~Histogram();
+	// Constructors.
+	Histogram(ColorChannel ch, int s = 256); // Constructor
+	Histogram(Histogram & h);				 // Copy Constructor.
+	~Histogram();							 // Deconstructor
 
+	// Assignment operator.
 	Histogram & operator=(const Histogram & h);
 
+	// Equalize histogram.
 	void equalizeHistogram();
+	// Export Histogram to file.
 	void exportHistogramCSV(std::string filename);
 private:
+	// Holds the colorchannel.
 	ColorChannel channel;
+
+	// Holds the histogram values.
 	double * histogram;
+
+	// Holds the image size.
 	int size;
 };
 

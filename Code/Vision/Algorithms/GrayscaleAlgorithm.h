@@ -17,6 +17,7 @@ public:
 			green = ptr[x + 1];
 			blue = ptr[x + 2];
 
+			// GrayScale calculation
 			unsigned char grayscale = (unsigned char) ((red * .3) + (green * .59) + (blue * .11));
 
 			ptr[x] = grayscale;

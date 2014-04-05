@@ -1,8 +1,10 @@
 #include "Image.h"
 
 Image::Image(int w, int h) {
+	// Image loaded is true.
 	loaded = true;
 
+	// Initialize values.
 	width = w;
 	height = h;
 
@@ -10,25 +12,31 @@ Image::Image(int w, int h) {
 	data = new unsigned char[size];
 	unsigned char * ptr = data;
 
+	// Make every pixel black.
 	for (int i = 0; i < size; i++) {
 		ptr[i] = 0;
 	}
 }
 
 Image::Image(std::string filename) {
+	// Get the FIF for the given file. Fif contains the file type. For example: FIF_JPEG, FIF_BMP.
 	FREE_IMAGE_FORMAT fif = FreeImage_GetFileType(filename.c_str());
 
 	if (fif != FIF_UNKNOWN) {
+		// Load the image.
 		FIBITMAP * bitmap = FreeImage_Load(fif, filename.c_str());
 
+		// Set the width and height.
 		width = FreeImage_GetWidth(bitmap);
 		height = FreeImage_GetHeight(bitmap);
 
 		data = new unsigned char[width * height * 3];
 		unsigned char * ptr = data;
 
+		// pixel holds the RGB values.
 		RGBQUAD pixel;
 
+		// For every pixel in the image, copy the values to the array.
 		for (int y = height; y > 0; y--) {
 			for (int x = 0; x < width; x++) {
 				FreeImage_GetPixelColor(bitmap, x, y, &pixel);
@@ -53,6 +61,7 @@ Image::Image(const Image & image) {
 }
 
 Image & Image::operator=(const Image & image) {
+	// Only delete if the data has been initialized(= new unsigned char[size]).
 	if (loaded) {
 		delete[] data;
 	}
@@ -65,6 +74,7 @@ Image & Image::operator=(const Image & image) {
 	int size = width * height * 3;
 	data = new unsigned char[size];
 
+	// Copy every pixel.
 	for (int i = 0; i < size; i++) {
 		data[i] = image.data[i];
 	}
@@ -73,6 +83,7 @@ Image & Image::operator=(const Image & image) {
 }
 
 Image::~Image() {
+	// Only delete if the data has been initialized(= new unsigned char[size]).
 	if (loaded) {
 		delete[] data;
 	}
@@ -88,10 +99,12 @@ int Image::getHeight() {
 
 void Image::saveImage(std::string filename, bool r, bool g, bool b) {
 	if (loaded) {
+		// Create a bitmap to hold the image.
 		FIBITMAP * bitmap = FreeImage_Allocate(width, height, 24);
 
 		unsigned char * ptr = data;
 
+		// pixel holds a single pixel(RGB).
 		RGBQUAD pixel;
 		for (int y = height; y > 0; y--) {
 			for (int x = 0; x < width; x++) {
@@ -124,6 +137,7 @@ void Image::saveImage(std::string filename, bool r, bool g, bool b) {
 
 		filename += ".bmp";
 
+		// Save the image using BMP format.
 		FreeImage_Save(FIF_BMP, bitmap, filename.c_str(), 0);
 	}
 }
